@@ -61,8 +61,8 @@ if LANGUAGE not in ["EN", "TR", "AZ", "UZ", "DEFAULT"]:
     LOGS.info("Bilinmeyen bir dil yazdınız. Bundan dolayı DEFAULT kullanılıyor.")
     LANGUAGE = "DEFAULT"
     
-# Mia versiyon
-MIA_VERSION = "v0.2"
+# Legend version
+LEGEND_VERSION = "v0.2"
 
 # Telegram API KEY ve HASH
 API_KEY = os.environ.get("API_KEY", None)
@@ -115,13 +115,13 @@ AI_LANG = os.environ.get("AI_LANG", 'en')
 # Güncelleyici için özel (fork) repo linki.
 
 
-UPSTREAM_REPO_URL = "https://github.com/erdewbey/OwenUserBot.git" 
+UPSTREAM_REPO_URL = "https://github.com/Arazzq/LegendUserBot.git" 
 
 # Afk mesajların iletilmesi
 AFKILETME = sb(os.environ.get("AFKILETME", "True"))
 
 # SQL Veritabanı
-DB_URI = os.environ.get("DATABASE_URL", "sqlite:///siri.db")
+DB_URI = os.environ.get("DATABASE_URL", "sqlite:///legend.db")
 
 # OCR API key
 OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
@@ -151,7 +151,7 @@ WORKTIME = time.time()
 
 PLUGINID = os.environ.get("PLUGIN_CHANNEL_ID", None)
 
-STORECHANNEL = os.environ.get("STORECHANNEL", '@Miaplugin')
+STORECHANNEL = os.environ.get("STORECHANNEL", '@Legendpluginn')
 
 if not PLUGINID:
     PLUGIN_CHANNEL_ID = "me"
@@ -206,8 +206,8 @@ else:
 CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 
 # Last.fm Modülü
-BIO_PREFIX = os.environ.get("BIO_PREFIX", "@MiaUserBot | ")
-DEFAULT_BIO = os.environ.get("DEFAULT_BIO", "✨ @MiaUserBot")
+BIO_PREFIX = os.environ.get("BIO_PREFIX", "@LegendOT | ")
+DEFAULT_BIO = os.environ.get("DEFAULT_BIO", "✨ LegendOT")
 
 LASTFM_API = os.environ.get("LASTFM_API", None)
 LASTFM_SECRET = os.environ.get("LASTFM_SECRET", None)
@@ -251,7 +251,7 @@ PM_AUTO_BAN_LIMIT = int(os.environ.get("PM_AUTO_BAN_LIMIT", 4))
 SPOTIFY_DC = os.environ.get("SPOTIFY_DC", None)
 SPOTIFY_KEY = os.environ.get("SPOTIFY_KEY", None)
 
-PAKET_ISMI = os.environ.get("PAKET_ISMI", "| 🌃 @MiaUserBot Paketi |")
+PAKET_ISMI = os.environ.get("PAKET_ISMI", "| 🌃 @LegendOT Paketi |")
 
 # Userbotu kapatmak için gruplar
 BLACKLIST_CHAT = os.environ.get("BLACKLIST_CHAT", None)
@@ -394,23 +394,23 @@ with bot:
 
 
     try:
-        bot(JoinChannelRequest("@miauserbot"))
+        bot(JoinChannelRequest("@LegendOT"))
         if OTOMATIK_KATILMA:
-            bot(JoinChannelRequest("@miaSupports"))
+            bot(JoinChannelRequest("@suplegend"))
     except:
         pass
 
     erdemgtten = False    ### L
 
     try:
-        bot(LeaveChannelRequest("@SiriUserbot"))
+        bot(LeaveChannelRequest("Userbot"))
     except:
         pass
 
     erdemgtten = True   ### O
 
     try:
-        bot(LeaveChannelRequest("@HydraDev"))
+        bot(LeaveChannelRequest("@Suplegend"))
     except:
         pass
 
@@ -418,7 +418,7 @@ with bot:
 
 
     try:
-        bot(LeaveChannelRequest("@SiriPlugin"))
+        bot(LeaveChannelRequest("@LegendPluginn"))
     except:
         pass
 
@@ -426,12 +426,12 @@ with bot:
 
     if erdemgtten:
         try:
-            bot(LeaveChannelRequest("@SiriSohbet"))
+            bot(LeaveChannelRequest("@Iegendchat"))
         except:
             pass
         erdemgtten = False
         try:
-            bot(LeaveChannelRequest("@Hydradestek"))
+            bot(LeaveChannelRequest("@suplegend"))
         except:
             pass
 
@@ -445,7 +445,7 @@ with bot:
         @tgbot.on(NewMessage(pattern='/start'))
         async def start_bot_handler(event):
             if not event.message.from_id == uid:
-                await event.reply(f'`Merhaba ben` @MiaUserBot`! Ben sahibime (`@{me.username}`) yardımcı olmak için varım, yaani sana yardımcı olamam :/ Ama sen de bir Mia açabilirsin; Kanala bak` @MiaUserBot')
+                await event.reply(f'`Salam mən` @legendot`! Mən sahibimə (`@{me.username}`) yardımcı olmaq üçün varam, yəni sənə kömək edə bilmərəm :/ Ama sən də bir Legend aça bilərsən; Kanala bax` @Legendot')
             else:
                 await event.reply(f'`Tengri save Turks! Mia working... `')
 
@@ -459,15 +459,15 @@ with bot:
                 veriler = (butonlastir(0, sorted(CMD_HELP)))
                 result = await builder.article(
                     f"Lütfen Sadece .yardım Komutu İle Kullanın",
-                    text=f"**En Gelişmiş UserBot!** [Mia](https://t.me/miauserbot) __Çalışıyor...__\n\n**Yüklenen Modül Sayısı:** `{len(CMD_HELP)}`\n**Sayfa:** 1/{veriler[0]}",
+                    text=f"**Ən Müasir UserBot!** [Legend](https://t.me/LegendOT) __işləyir...__\n\n**Yüklənən Modul Sayısı:** `{len(CMD_HELP)}`\n**Səhifə:** 1/{veriler[0]}",
                     buttons=veriler[1],
                     link_preview=False
                 )
             elif query.startswith("http"):
                 parca = query.split(" ")
                 result = builder.article(
-                    "Dosya Yüklendi",
-                    text=f"**Dosya başarılı bir şekilde {parca[2]} sitesine yüklendi!**\n\nYükleme zamanı: {parca[1][:3]} saniye\n[‏‏‎ ‎]({parca[0]})",
+                    "Dosya Yükləndi",
+                    text=f"**Fayl uğurlu bir şəkildə {parca[2]} saytına yükləndi!**\n\nYükləmə zamanı: {parca[1][:3]} saniyə\n[‏‏‎ ‎]({parca[0]})",
                     buttons=[
                         [custom.Button.url('URL', parca[0])]
                     ],
@@ -475,14 +475,14 @@ with bot:
                 )
             else:
                 result = builder.article(
-                    "@MiaUserBot",
-                    text="""@MiaUserBot'u kullanmayı deneyin!
-Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın, siz başkasının botunu yönetemezsiniz! Alttaki GitHub adresinden tüm kurulum detayları anlatılmıştır.""",
+                    "@Legendot",
+                    text="""@Legendot'u işlətməyi cəhd edin!
+Hesabınızı bot'a çevirə bilərsiniz ve bunları işlədə bilərsiniz. Unutmuyun, siz başqasının botunu idarə edə bilmərsiniz! Altdakı GitHub ad bütün qurulum haqqında danışılmışdır.""",
                     buttons=[
-                        [custom.Button.url("Kanala Katıl", "https://t.me/miauserbot"), custom.Button.url(
-                            "Gruba Katıl", "https://t.me/miaSupports")],
+                        [custom.Button.url("Kanala Qatıl", "https://t.me/LegendOT"), custom.Button.url(
+                            "Gruba Katıl", "https://t.me/suplegend")],
                         [custom.Button.url(
-                            "GitHub", "https://github.com/MiaUserBot/mia")]
+                            "GitHub", "https://github.com/Arazzq/LegendUserBot")]
                     ],
                     link_preview=False
                 )
@@ -491,11 +491,11 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
         @tgbot.on(callbackquery.CallbackQuery(data=compile(b"sayfa\((.+?)\)")))
         async def sayfa(event):
             if not event.query.user_id == uid: 
-                return await event.answer("❌ Hey! Benim mesajlarımı düzenlemeye kalkma! Kendine bir @MiaUserBot kur.", cache_time=0, alert=True)
+                return await event.answer("❌ Hoyy! Mənim mesajlarımı editləmə! Özünə bir @LegendOt qur.", cache_time=0, alert=True)
             sayfa = int(event.data_match.group(1).decode("UTF-8"))
             veriler = butonlastir(sayfa, CMD_HELP)
             await event.edit(
-                f"** En Gelişmiş UserBot!** [Mia](https://t.me/MiaUserBot) __Çalışıyor...__\n\n**Yüklenen Modül Sayısı:** `{len(CMD_HELP)}`\n**Sayfa:** {sayfa + 1}/{veriler[0]}",
+                f"** Ən Müasir UserBot!** [Legend](https://t.me/legendot) __İşləyir...__\n\n**Yüklənən Modul Sayısı:** `{len(CMD_HELP)}`\n**Səhifə:** {sayfa + 1}/{veriler[0]}",
                 buttons=veriler[1],
                 link_preview=False
             )
@@ -503,14 +503,14 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
         @tgbot.on(callbackquery.CallbackQuery(data=compile(b"bilgi\[(\d*)\]\((.*)\)")))
         async def bilgi(event):
             if not event.query.user_id == uid: 
-                return await event.answer("❌  Hey! Benim mesajlarımı düzenlemeye kalkma! Kendine bir @MiaUserBot kur.", cache_time=0, alert=True)
+                return await event.answer("❌  Hoyy! Mənim mesajlarımı editləmə! Özünə bir @legendot qur.", cache_time=0, alert=True)
 
             sayfa = int(event.data_match.group(1).decode("UTF-8"))
             komut = event.data_match.group(2).decode("UTF-8")
             try:
                 butonlar = [custom.Button.inline("🔹 " + cmd[0], data=f"komut[{komut}[{sayfa}]]({cmd[0]})") for cmd in CMD_HELP_BOT[komut]['commands'].items()]
             except KeyError:
-                return await event.answer("❌ Bu modüle açıklama yazılmamış.", cache_time=0, alert=True)
+                return await event.answer("❌ Bu modula açıqlama yazılmamış.", cache_time=0, alert=True)
 
             butonlar = [butonlar[i:i + 2] for i in range(0, len(butonlar), 2)]
             butonlar.append([custom.Button.inline("◀️ Geri", data=f"sayfa({sayfa})")])
@@ -523,7 +523,7 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
         @tgbot.on(callbackquery.CallbackQuery(data=compile(b"komut\[(.*)\[(\d*)\]\]\((.*)\)")))
         async def komut(event):
             if not event.query.user_id == uid: 
-                return await event.answer("❌ Hey! Benim mesajlarımı düzenlemeye kalkma! Kendine bir @MiaUserBot kur.", cache_time=0, alert=True)
+                return await event.answer("❌ Hooy! Mənim mesajlarımı editləmə! Özünə bir @legendot qur.", cache_time=0, alert=True)
 
             cmd = event.data_match.group(1).decode("UTF-8")
             sayfa = int(event.data_match.group(2).decode("UTF-8"))
@@ -562,17 +562,17 @@ Hesabınızı bot'a çevirebilirsiniz ve bunları kullanabilirsiniz. Unutmayın,
     except Exception as e:
         print(e)
         LOGS.info(
-            "Botunuzda inline desteği devre dışı bırakıldı. "
-            "Etkinleştirmek için bir bot token tanımlayın ve botunuzda inline modunu etkinleştirin. "
-            "Eğer bunun dışında bir sorun olduğunu düşünüyorsanız bize ulaşın t.me/MiaSupports."
+            "Botunuzda inline dəstəyi xaric edildi. "
+            "Aktiv etmək üçün bir bot token tanımlayın və botunuzda inline modunu aktiv edin. "
+            "Əgər bunun xaricində bir problem olduğunu düşünsəz bizlə əlaqə qurun t.me/suplegend."
         )
 
     try:
         bot.loop.run_until_complete(check_botlog_chatid())
     except:
         LOGS.info(
-            "BOTLOG_CHATID ortam değişkeni geçerli bir varlık değildir. "
-            "Ortam değişkenlerinizi / config.env dosyanızı kontrol edin."
+            "BOTLOG_CHATID ortaq dəyişkəni keçərli bir varlıq deyildir. "
+            "Ortaq dəyişkənlərinizi / config.env faylınızı yoxlayın."
         )
         sys.exit(1)
 
