@@ -24,5 +24,5 @@ def __list_all_modules():
 
 
 ALL_MODULES = sorted(__list_all_modules())
-LOGS.info("Yüklenecek modüller: %s", str(ALL_MODULES))
+LOGS.info("Yüklənəcək modullar: %s", str(ALL_MODULES))
 __all__ = ALL_MODULES + ["ALL_MODULES"]
