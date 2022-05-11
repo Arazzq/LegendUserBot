@@ -10,7 +10,7 @@ import sys
 from telethon.tl.types import InputMessagesFilterDocument
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from telethon.tl.functions.channels import GetMessagesRequest
-from . import BRAIN_CHECKER, LOGS, bot, PLUGIN_CHANNEL_ID, CMD_HELP, LANGUAGE, MIA_VERSION, PATTERNS, ForceVer
+from . import BRAIN_CHECKER, LOGS, bot, PLUGIN_CHANNEL_ID, CMD_HELP, LANGUAGE, LEGEND_VERSION, PATTERNS, ForceVer
 from .modules import ALL_MODULES
 import userbot.modules.sql_helper.mesaj_sql as MSJ_SQL
 import userbot.modules.sql_helper.galeri_sql as GALERI_SQL
@@ -24,76 +24,74 @@ import re
 import userbot.cmdhelp
 
 ALIVE_MSG = [
-    "`Userbotunuz çalışıyor. Sana bişey demek istiyorum.. Seni seviyorum` **{miasahip}** ❤️",
-    "🎆 `Endişelenme! Seni yanlız bırakmam.` **{miasahip}**, `MiaUserbot çalışıyor.`",
-    "`⛈️ Elimden gelenin en iyisini yapmaya hazırım`, **{miasahip}**",
-    "✨ `MiaUserBot sahibinin emirlerine hazır...`",
-    "`Şuan en gelişmiş userbotun düzenlediği mesajı okuyor olmalısın` **{miasahip}**.",
-    "`Benimi Aramıştın ❓ Ben Buradayım Merak Etme`"
-    "`Userbotunuz çalışalı şu kadar oluyor:` **{worktime}** ❤️",
-    "🎆 `Endişelenme! Seninleyim.` **{miasahip}**, `userbot çalışıyor.`",
-    "`⛈️ Yeni gibi görünüyor!`, **{miasahip}:3**",
-    "✨ `Userbot sahibinin emirlerine hazır...`",
-    "`Huh!` **{miasahip}** `beni çağırıyor 🍰 < bu senin için 🥺..`",
-    "{mention} **Mia Senin İçin Çalışıyor✨**",
-    "{username}, `MiaUserBot {worktime} zamandır çalışıyor...`\n——————————————\n**Telethon sürümü :** `{telethon}`\n**Userbot sürümü  :** `{mia}`\n**Python sürümü    :** `{python}`\n**Plugin sayısı :** `{plugin}`\n——————————————\n**Emrine amadeyim dostum... 😇**"
-]
-
+    "`Userbotunuz işləyir. Sənə birşey demək istiyirəm.. Səni sevirəç` **{legendsahip}** ❤️",
+    "🎆 `Narahat olma! Səni yalnız buraxmaram.` **{legendsahip}**, `LegendUserbot işləyir.`",
+    "`⛈️ Əlimdən gələnin ən yaxşısını etməyə hazıram`, **{legendsahip}**",
+    "✨ `LegendUserBot sahibinin əmirlərinə hazır...`",
+    "`İndi ən müasir userbotun editlədiyi mesajı oxumalısan` **{legendsahip}**.",
+    "`Mənə zəng eləmişdin❓ Mən Buradayam Maraqlanma`"
+    "`Userbotunuz işləyəli bu qədər olur:` **{worktime}** ❤️",
+    "🎆 `Narahat olma! Səninləyəm.` **{legendsahip}**, `userbot işləyir.`",
+    "`⛈️ Yeni kimi görünür!`, **{legendsahip}:3**",
+    "✨ `Userbot sahibinin əmirlərinə hazır...`",
+    "`Huh!` **{legendsahip}** `məni çağırır 🍰 < bu sənin üçündür 🥺..`",
+    "{mention} **Legend Sənin Üçün İşləyir✨**",
+    "{username}, `LegendUserBot {worktime} zamandır işləyir...`\n——————————————\n**Telethon versiyası :** `{telethon}`\n**Userbot versiyası  :** `{legend}`\n**Python versiyası    :** `{python}`\n**Plugin sayısı :** `{plugin}`\n——————————————\n**Əmrindəyəm dostum... 😇*
 DIZCILIK_STR = [
-    "Çıkartmayı dızlıyorum...",
-    "Çaldım Gitti Geçmiş Olsun 🤭",
-    "Yaşasın dızcılık...",
-    "Bu çıkartmayı kendi paketime davet ediyorum...",
-    "Bunu dızlamam lazım...",
-    "Hey bu güzel bir çıkartma!\nHemen dızlıyorum..",
-    "Çıkartmanı dızlıyorum\nhahaha.",
-    "Hey şuraya bak. (☉｡☉)!→\nBen bunu dızlarken...",
-    "Güller kırmızı menekşeler mavi, bu çıkartmayı paketime dızlayarak havalı olacağım...",
-    "Çıkartma hapsediliyor...",
-    "Bay dızcı bu çıkartmayı dızlıyor... ",
-    "Bu güzel çıkartma neden benim paketimde de olmasın🤭",
+    "Stikeri dızlıyıram...",
+    "Oğurladım Getdi Keçmiş Olsun 🤭",
+    "Yaşasın dızcılıq...",
+    "Bu stikeri öz paketimə dəvət edirəm...",
+    "Bunu dızlamam lazımdıda ...",
+    "Hooy bu gözəl bir stiker!\nHəmən dızlıyıram..",
+    "Stikeri dızlıyıram\nhahaha.",
+    "Hooy bura bax. (☉｡☉)!→\nMən bunu dızlayanda...",
+    "Güllər qırmızı bənövşələr mavi, bu stiker paketime dızlayaraq havalı olacam...",
+    "Stiker həbs edilir...",
+    "Canım, dızcı bu stikeri dızlıyır... ",
+    "Bu gözəl stiker niyə mənim paketimde də olmasın🤭",
 ]
 
 AFKSTR = [
-    "Şu an acele işim var, daha sonra mesaj atsan olmaz mı? Zaten yine geleceğim.",
-    "Aradığınız kişi şu anda telefona cevap veremiyor. Sinyal sesinden sonra kendi tarifeniz üzerinden mesajınızı bırakabilirsiniz. Mesaj ücreti 49 kuruştur. \n`biiiiiiiiiiiiiiiiiiiiiiiiiiiiip`!",
-    "Birkaç dakika içinde geleceğim. Fakat gelmezsem...\ndaha fazla bekle.",
-    "Şu an burada değilim, ama muhtemelen başka bir yerdeyim.",
-    "Güller kırmızı\nMenekşeler mavi\nBana bir mesaj bırak\nVe sana döneceğim.",
-    "Bazen hayattaki en iyi şeyler beklemeye değer…\nHemen dönerim.",
-    "Hemen dönerim,\nama eğer geri dönmezsem,\ndaha sonra dönerim.",
-    "Henüz anlamadıysan,\nburada değilim.",
-    "Merhaba, uzak mesajıma hoş geldiniz, bugün sizi nasıl görmezden gelebilirim?",
-    "7 deniz ve 7 ülkeden uzaktayım,\n7 su ve 7 kıta,\n7 dağ ve 7 tepe,\n7 ovala ve 7 höyük,\n7 havuz ve 7 göl,\n7 bahar ve 7 çayır,\n7 şehir ve 7 mahalle,\n7 blok ve 7 ev...\n\nMesajların bile bana ulaşamayacağı bir yer!",
-    "Şu anda klavyeden uzaktayım, ama ekranınızda yeterince yüksek sesle çığlık atarsanız, sizi duyabilirim.",
-    "Şu yönde ilerliyorum\n---->",
-    "Şu yönde ilerliyorum\n<----",
-    "Lütfen mesaj bırakın ve beni zaten olduğumdan daha önemli hissettirin.",
+    "İndi tələsirəm, daha sonra mesaj atsan olmaz dı? Onsuz yenə gələcəmdə.",
+    "Çağırdığınız kişi İndi telefona cavab verə bilmir. Siqnal səsindən sonra öz tərifiniz üzərindən mesajınızı buraxa bilərsiniz. Mesaj haqqı 49 qəpiydir. \n`biiiiiiiiiiiiiiiiiiiiiiiiiiiiib`!",
+    "Bir neçə dəqiqəyə gələcəm. Amma, gəlməzsəm...\ndaha çox gözlə.",
+    "İndi burada deyiləm, amma ehtimal edirəmki başqa bir yerdəyəm.",
+    "Güllər qırmızı\nBənövşələr mavi\nMənə bir mesaj burax\nVə sənə gələcəm.",
+    "Bəzən həyatdakı ən yaxşı şeyləri gözləməyə dəyər…\nİndi gələrəm.",
+    "İndi gələrəm,\namma geri gəlməzsəm,\ndaha sonra gələrəm.",
+    "Hələdə anlamamısan?,\nburada deyiləm.",
+    "Salam, uzaq mesajıma xoş gəldiniz, bugün sizi necə görməzdən gələ bilərəm?",
+    "7 dəniz və 7 ölkədən uzaqdayam,\n7 su ve 7 qitə,\n7 dağ və 7 təpə,\n7 ovala və 7 kurqan,\n7 hovuz və 7 göl,\n7 bahar və 7 çəmən,\n7 şəhər və 7 məhəllə,\n7 blok və 7 ev...\n\nMesajların belə mənə çata bilməyəcəyi bir yer!",
+    "İndi klaviyaturadan uzaqdayam, amma ekranınızda yetərincə yüksək səslə qışqırsanız, sizi eşidə bilərəm.",
+    "Bu yöndə gedirəm\n---->",
+    "Bu yöndə gedirəm\n<----",
+    "Xahiş mesaj buraxın və məni olduğumdan daha özəl hiss etdirin.",
     "Sahibim burada değil, bu yüzden bana yazmayı bırak.",
-    "Burada olsaydım,\nSana nerede olduğumu söylerdim.\n\nAma ben değilim,\ngeri döndüğümde bana sor...",
-    "Uzaklardayım!\nNe zaman dönerim bilmiyorum !\nUmarım birkaç dakika sonra!",
-    "Sahibim şuan da müsait değil. Adınızı, numarınızı ve adresinizi verirseniz ona iletibilirm ve böylelikle geri döndüğü zaman.",
-    "Üzgünüm, sahibim burada değil.\nO gelene kadar benimle konuşabilirsiniz.\nSahibim size sonra döner.",
-    "Bahse girerim bir mesaj bekliyordun!",
-    "Hayat çok kısa, yapacak çok şey var...\nOnlardan birini yapıyorum...",
-    "Şu an burada değilim....\nama öyleysem ...\n\nbu harika olmaz mıydı?",
-    "Beni hatırladığına sevindim ama şuanda klavye bana çok uzak",
-    "Belki İyiyim, Belki Kötüyüm Bilmiyorsun Ama AFK Olduğumu Görebiliyorsun"
+    "Burada olsaydım,\nSənə harada olduğumu deyərdim.\n\nAmma mən deyiləm,\ngeri gəldiyimdə mənə de...",
+    "Uzaqlardayam!\nNə vaxt gələrəm bilmirəm !\nÜmid edirəmki bir neçə dəqiqə sonra!",
+    "Sahibim indidə məşğuldur. Adınızı, nömrənizi və adresinizi versəniz ona göndərə bilərəm və beləliklə geri döndüyü zaman.",
+    "Çox pisəm, sahibim burada deyil.\nO gələnə qədər mənimlə danışa bilərsiniz.\nSahibim sizə sonra gələr.",
+    "Bəhsə girərəm bir mesaj gözləyirdin!",
+    "Həyat çok qısa, edəcək çox şey var...\nOnlardan birini edirəm...",
+    "İndi burada deyiləm....\nama eləsəm ...\n\nbu babat olmazdı?",
+    "Məni xatırladığına sevindim amma indi klaviyatura mənə çox uzaqdır",
+    "Bəlkə Yaxşıyam, Bəlkə pisəm, Bilmirsən Amma AFK Olduğumu Görə bilirsən"
 ]
 
 KICKME_MSG = [
-    "Güle güle ben gidiyorum 👋🏻",
-    "Sessizce çıkıyorum 🥴",
-    "Haberin olmadan çıkarsam bir gün benim grupta olmadığı farkedeceksin.. O yüzden bu mesajı bırakıyorum🚪",
-    "Hemen burayı terk etmeliyim🤭",
-    "7 deniz ve 7 ülke,\n7 su ve 7 kıta,\n7 dağ ve 7 tepe,\n7 ovala ve 7 höyük,\n7 havuz ve 7 göl,\n7 bahar ve 7 çayır,\n7 şehir ve 7 mahalle,\n7 blok ve 7 ev...\n\nKısaca bu gruptan uzak bi yere..!",
-    "Hadi ben kaçtım!"
+    "Sağol da mən gedirəm👋🏻",
+    "Səssizcə tullanıram 🥴",
+    "Xəbərin olmadan çıxarsam bir gün mənim qrupta olmadığını biləcəksən.. Onun üçün bu mesajı buraxıram🚪",
+    "Mən buranı tərk etməliyəm🤭"
+    "7 dəniz və 7 ölkə,\n7 su və 7 qitə,\n7 dağ və 7 təpə,\n7 ovala və 7 kurqan,\n7 hovuz və 7 göl,\n7 bahar və 7 çəmən,\n7 şəhər ve 7 məhəllə,\n7 blok və 7 ev...\n\nQısaca bu qruptan uzaq bir yerə..!",
+    "Sağolun mən qaçdım!"
 ]
 
 
-UNAPPROVED_MSG = ("`{mention} Sahibim onay verene kadar bu mesajı alacaksın👩🏻‍💻!\n\n`"
-                  "`✔️ Onaylı olmadığın sürece her yazdığın mesaja yanıt olarak sahibimin yerine ben mesaj  `"
-                  "`atacağım.....\n\n`")
+UNAPPROVED_MSG = ("`{mention} Sahibim təsdiq edənə qədər bu mesajı alacaqsın👩🏻‍💻!\n\n`"
+                  "`✔️ Təsdiqli olmadığın vaxtda hər yazdığın mesaja yanıt olaraq sahibimin yerinə mən mesaj  `"
+                  "`atacağam.....\n\n`")
 
 DB = connect("learning-data-root.check")
 CURSOR = DB.cursor()
@@ -101,9 +99,9 @@ CURSOR.execute("""SELECT * FROM BRAIN1""")
 ALL_ROWS = CURSOR.fetchall()
 
 
-INVALID_PH = '\nHATA: Girilen telefon numarası geçersiz' \
-             '\n  Ipucu: Ülke kodunu kullanarak numaranı gir' \
-             '\n   Telefon numaranızı tekrar kontrol edin'
+INVALID_PH = '\nHATA: Girilen telefon nömrəsi keçərsiz' \
+             '\n  Ipucu: Ölkə kodunu işlədərək nömrəni gir' \
+             '\n   Telefon nömrənizi təkrar yoxlayın'
 
 for i in ALL_ROWS:
     BRAIN_CHECKER.append(i[0])
@@ -148,10 +146,10 @@ def extractCommands(file):
                         Komutlar.append(KomutStr)
 
             # MIAPY
-            Miapy = re.search('\"\"\"MIAPY(.*)\"\"\"', FileRead, re.DOTALL)
-            if not Miapy == None:
-                Miapy = Siripy.group(0)
-                for Satir in Miapy.splitlines():
+            Legendpy = re.search('\"\"\"LEGENDPY(.*)\"\"\"', FileRead, re.DOTALL)
+            if not Legendpy == None:
+                Legendpy = Legendpy.group(0)
+                for Satir in Legendpy.splitlines():
                     if (not '"""' in Satir) and (':' in Satir):
                         Satir = Satir.split(':')
                         Isim = Satir[0]
@@ -166,7 +164,7 @@ def extractCommands(file):
             for Komut in Komutlar:
                 # if re.search('\[(\w*)\]', Komut):
                     # Komut = re.sub('(?<=\[.)[A-Za-z0-9_]*\]', '', Komut).replace('[', '')
-                CmdHelp.add_command(Komut, None, 'Bu plugin dışarıdan yüklenmiştir. Herhangi bir açıklama tanımlanmamıştır.')
+                CmdHelp.add_command(Komut, None, 'Bu plugin xaricdən yüklənmişdir. Hər hansı bir açıqlama tanımlanmamışdır.')
             CmdHelp.add()
 
 forceVer = []
@@ -177,8 +175,7 @@ ALL_ROWS = CURSOR.fetchall()
 
 for i in ALL_ROWS:
     forceVer = i
-connect("force-surum.check").close() 
-
+connect("force-surum.check").close()
 try:
     ForceVer = int(forceVer)
 except:
@@ -190,8 +187,8 @@ try:
     idim = bot.get_me().id
     miabl = requests.get('https://raw.githubusercontent.com/Miauserbot/datas/master/blacklist.json').json()
     if idim in miabl:
-        bot.send_message("me", f"`❌ Mia yöneticileri sizi bottan yasakladı! Bot kapatılıyor...`")
-        LOGS.error("Mia yöneticileri sizi bottan yasakladı! Bot kapatılıyor...")
+        bot.send_message("me", f"`❌ Legend adminləri sizi botdan qadağa etdi! Bot bağlanır...`")
+        LOGS.error("Legend qurucuları sizi botdan qadağan etdi! Bot bağlanır...")
         bot.disconnect()
         sys.exit(1)
     # ChromeDriver'ı Ayarlayalım #
@@ -222,7 +219,7 @@ try:
             else:
                 PLUGIN_MESAJLAR[mesaj] = dmsj
     if not PLUGIN_CHANNEL_ID == None:
-        LOGS.info("🔄 Pluginler Yükleniyor..")
+        LOGS.info("🔄 Pluginlər Yüklənir..")
         try:
             KanalId = bot.get_entity(PLUGIN_CHANNEL_ID)
         except:
@@ -247,7 +244,7 @@ try:
 
                     spec.loader.exec_module(mod)
                 except Exception as e:
-                    LOGS.info(f"`[×] Yükleme Başarısız! Plugin Hatalı!!\n\nHata: {e}`")
+                    LOGS.info(f"`[×] Yükləmə Uğursuz! Plugin xətalı!!\n\nHata: {e}`")
 
                     try:
                         plugin.delete()
@@ -259,7 +256,7 @@ try:
                     continue
                 extractCommands('./userbot/modules/' + plugin.file.name)
     else:
-        bot.send_message("me", f"`Lütfen pluginlerin kalıcı olması için PLUGIN_CHANNEL_ID'i ayarlayın.`")
+        bot.send_message("me", f"`Xahiş pluginlərin qalıcı olması üçün PLUGIN_CHANNEL_ID'i ayarlayın.`")
 except PhoneNumberInvalidError:
     print(INVALID_PH)
     sys.exit(1)
@@ -285,12 +282,12 @@ for module_name in ALL_MODULES:
 os.system("clear")
 
 LOGS.info("+===========================================================+")
-LOGS.info("|                     ✨Mia Userbot✨                       |")
+LOGS.info("|                     ✨Legend Userbot✨                       |")
 LOGS.info("+==============+==============+==============+==============+")
 LOGS.info("|                                                            |")
-LOGS.info("Botunuz çalışıyor! Herhangi bir sohbete .alive yazarak Test edin."
-          " Yardıma İhtiyacınız varsa, Destek grubumuza gelin t.me/MiaSupport")
-LOGS.info(f"Bot versiyonunuz: Mia {MIA_VERSION}")
+LOGS.info("Botunuz işləyir! Hər hansı bir söhbətə .alive yazaraq Test edin."
+          " Yardıma Ehtiyacınız varsa, Kömək qrupumuza gəlin t.me/suplegend")
+LOGS.info(f"Bot versiyanız: Legend {LEGEND_VERSION}")
 
 """
 if len(argv) not in (1, 3, 4):
