@@ -4,7 +4,7 @@ from os import path, remove
 from telethon.tl.types import InputMessagesFilterDocument
 
 pchannel = bot.get_entity(PLUGIN_CHANNEL_ID)
-LOGS.info("Dil dosyası yükleniyor...")
+LOGS.info("Dil faylı yüklənir...")
 LANGUAGE_JSON = None
 
 for dil in bot.iter_messages(pchannel, filter=InputMessagesFilterDocument):
@@ -17,8 +17,8 @@ for dil in bot.iter_messages(pchannel, filter=InputMessagesFilterDocument):
                 remove(f"./userbot/language/{dil.file.name}")
 
                 if path.isfile("./userbot/language/DEFAULT.miajson"):
-                    LOGS.warn("Varsayılan dil dosyası kullanılıyor...")
-                    LANGUAGE_JSON = loads(open(f"./userbot/language/DEFAULT.miajson", "r").read())
+                    LOGS.warn("Varsayılan dil faylı işlədilir...")
+                    LANGUAGE_JSON = loads(open(f"./userbot/language/DEFAULT.legendjson", "r").read())
                 else:
                     raise Exception("Your language file is invalid")
         else:
@@ -27,23 +27,23 @@ for dil in bot.iter_messages(pchannel, filter=InputMessagesFilterDocument):
                 LANGUAGE_JSON = loads(open(DOSYA, "r").read())
             except JSONDecodeError:
                 dil.delete()
-                if path.isfile("./userbot/language/DEFAULT.miajson"):
-                    LOGS.warn("Varsayılan dil dosyası kullanılıyor...")
-                    LANGUAGE_JSON = loads(open(f"./userbot/language/DEFAULT.miajson", "r").read())
+                if path.isfile("./userbot/language/DEFAULT.legendjson"):
+                    LOGS.warn("Varsayılan dil faylı işlədilir...")
+                    LANGUAGE_JSON = loads(open(f"./userbot/language/DEFAULT.legendjson", "r").read())
                 else:
                     raise Exception("Your language file is invalid")
         break
 
 if LANGUAGE_JSON == None:
-    if path.isfile(f"./userbot/language/{LANGUAGE}.miajson"):
+    if path.isfile(f"./userbot/language/{LANGUAGE}.legendjson"):
         try:
-            LANGUAGE_JSON = loads(open(f"./userbot/language/{LANGUAGE}.miajson", "r").read())
+            LANGUAGE_JSON = loads(open(f"./userbot/language/{LANGUAGE}.legendjson", "r").read())
         except JSONDecodeError:
             raise Exception("Invalid json file")
     else:
         if path.isfile("./userbot/language/DEFAULT.miajson"):
-            LOGS.warn("Varsayılan dil dosyası kullanılıyor...")
-            LANGUAGE_JSON = loads(open(f"./userbot/language/DEFAULT.miajson", "r").read())
+            LOGS.warn("Varsayılan dil faylı işlədilir...")
+            LANGUAGE_JSON = loads(open(f"./userbot/language/DEFAULT.legendjson", "r").read())
         else:
             raise Exception(f"Didn't find {LANGUAGE} file")
 
