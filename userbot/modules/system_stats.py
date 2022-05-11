@@ -17,7 +17,7 @@ from platform import uname
 from shutil import which
 from requests import get
 import os
-from userbot import (CMD_HELP, MIA_VERSION, DEFAULT_NAME, WHITELIST, MYID, ASISTAN, WORKTIME, timemia, bot) 
+from userbot import (CMD_HELP, LEGEND_VERSION, DEFAULT_NAME, WHITELIST, MYID, ASISTAN, WORKTIME, timemia, bot) 
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from userbot.helps.asistan import bana_mi_diyo
@@ -90,7 +90,7 @@ async def bot_ver(event):
         revout = str(stdout.decode().strip()) \
             + str(stderr.decode().strip())
 
-        await event.edit(f"=== {MIA_VERSION} === "
+        await event.edit(f"=== {LEGEND_VERSION} === "
                          f"`{LANG['VERSION']}: "
                          "` \n"
                          f"{verout}"
@@ -100,7 +100,7 @@ async def bot_ver(event):
                          "`")
     else:
         await event.edit(
-            "Mia Dinlemede!!!"
+            "Legend Dinləmədə!!!"
         )
 
 
@@ -154,7 +154,7 @@ async def amialive(e):
             await e.edit(PLUGIN_MESAJLAR['alive'].format(
                 telethon=version.__version__,
                 python=python_version(),
-                mia=MIA_VERSION,
+                legend=LEGEND_VERSION,
                 plugin=len(CMD_HELP),
                 id=me.id,
                 worktime = await timemia.get_readable_time((emit() - WORKTIME)),
@@ -162,7 +162,7 @@ async def amialive(e):
                 first_name=me.first_name,
                 last_name=me.last_name if me.last_name else '',
                 mention=f'[{me.first_name}](tg://user?id={me.id})',
-                miasahip = sahipp
+                legendsahip = sahipp
             ))
         else:
             await e.delete()
@@ -170,7 +170,7 @@ async def amialive(e):
                 PLUGIN_MESAJLAR['alive'].text = PLUGIN_MESAJLAR['alive'].text.format(
                     telethon=version.__version__,
                     python=python_version(),
-                    siri=MIA_VERSION,
+                    legend=LEGEND_VERSION,
                     plugin=len(CMD_HELP),
                     id=me.id,
                     worktime = await timemia.get_readable_time((emit() - WORKTIME)),
@@ -178,7 +178,7 @@ async def amialive(e):
                     first_name=me.first_name,
                     last_name=me.last_name if me.last_name else '',
                     mention=f'[{me.first_name}](tg://user?id={me.id})',
-                    miasahip = sahipp
+                    legendsahip = sahipp
                 )
             if e.is_reply:
                 await e.respond(PLUGIN_MESAJLAR['alive'], reply_to=e.message.reply_to_msg_id)
@@ -194,17 +194,17 @@ async def asistanalive(ups):
     if ups.sender_id == 1758581185:
         hitap = "💝 ʕっ•ᴥ•ʔっ Asistan"
     else:
-        hitap = "Yöneticim"
-    SiriVer = str(MIA_VERSION.replace("v","")) 
-    await ups.reply(f"__{hitap} seni seviyorum❤! Mia çalışıyor!__")
+        hitap = "Sahibim"
+    SiriVer = str(LEGEND_VERSION.replace("v","")) 
+    await ups.reply(f"__{hitap} səni sevirəm❤! Legend işləyi!__")
 
 
 CmdHelp('system_stats').add_command(
-    'sysd', None, 'Neofetch modülünü kullanarak sistem bilgisi gösterir.'
+    'sysd', None, 'Neofetch modulunu işlədərək sistem məlumatı göstərir.'
 ).add_command(
-    'botver', None, 'Userbot sürümünü gösterir.'
+    'botver', None, 'Userbot versiyasını göstərir.'
 ).add_command(
-    'pip', '<modül(ler)>', 'Pip modüllerinde arama yapar.'
+    'pip', '<modül(ler)>', 'Pip modullarında axtarış edər.'
 ).add_command(
-    'alive', None, 'Mia botunun çalışıp çalışmadığını kontrol etmek için kullanılır.'
+    'alive', None, 'Legend botunun işləyib işləmədəyini yoxlamaq üçün işlədilir.'
 ).add()
