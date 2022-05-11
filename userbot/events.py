@@ -11,7 +11,7 @@ from time import gmtime, strftime
 from traceback import format_exc
 from telethon.events import NewMessage as NW, MessageEdited as ME, StopPropagation as SP
 from telethon.errors.rpcerrorlist import MessageIdInvalidError
-from userbot import bot, SUDO_ID, ASISTAN, SEVGILI, BOTLOG_CHATID, LOGSPAMMER, PATTERNS, MIA_VERSION, ForceVer
+from userbot import bot, SUDO_ID, ASISTAN, SEVGILI, BOTLOG_CHATID, LOGSPAMMER, PATTERNS, LEGEND_VERSION, ForceVer
 
 
 def register(**args):
@@ -80,9 +80,9 @@ def register(**args):
 
     def decorator(func):
         async def wrapper(check):
-            MiaVer = int(MIA_VERSION.split(".")[1])
-            if ForceVer > MiaVer:
-                await check.edit(f"`🌈 Botu acilen güncellemen lazım! Bu sürüm artık kullanılamıyor..`\n\n__🥺 Sorunu çözmek için__ `.update now` __yazmalısın!__")
+            LegendVer = int(LEGEND_VERSION.split(".")[1])
+            if ForceVer > LegendVer:
+                await check.edit(f"`🌈 Botu təcili güncəlləmən lazımdır! Bu versiya artıq işlədilə bilmir..`\n\n__🥺 Xətanı həll etmək üçün__ `.update now` __yazmalısan!__")
                 return
 
             if not LOGSPAMMER:
@@ -99,17 +99,17 @@ def register(**args):
             if groups_only and not check.is_group:
                 if not notifyoff:
                     try:
-                        await check.edit("`⛔ Bunun bir grup olduğunu sanmıyorum. Bu plugini bir grupta dene! `")
+                        await check.edit("`⛔ Bunun bir qrup olduğuna inanmıram. Bu plugini bir qrupta cəhd et! `")
                     except:
-                        await check.respond("`⛔ Bunun bir grup olduğunu sanmıyorum. Bu plugini bir grupta dene! `")
+                        await check.respond("`⛔ Bunun bir qrup olduğuna inanmıram. Bu plugini bir qrupta cəhd et! `")
                 return
 
             if replyneeded and not check.is_reply:
                 if not notifyoff:
                     try:
-                        await check.edit("`🤰🏻Plugini kullanabilmek için bir mesajı yanıtlamalısın!`")
+                        await check.edit("`🤰🏻Plugini işlədə bilmək üçün bir mesajı yanıtlamalısan!`")
                     except:
-                        await check.respond("`🤰🏻 Plugini kullanabilmek için bir mesajı yanıtlamalısın!`")
+                        await check.respond("`🤰🏻 Plugini işlədə bilmək üçün bir mesajı yanıtlamalısan!`")
                 return
 
             try:
@@ -122,7 +122,7 @@ def register(**args):
                 pass
             except MessageIdInvalidError:
                 try: 
-                    await check.respond('__🗒️ ( **Hata** ) :: Plugine ait mesaj silinmiş gibi görünüyor..__')
+                    await check.respond('__🗒️ ( **Xəta** ) :: Pluginə aid mesaj silinmiş kimi görünür..__')
                 except:
                     pass
             except BaseException:
@@ -130,38 +130,38 @@ def register(**args):
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
                     eventtext = str(check.text)
-                    text = "**≛『 USERBOT HATA RAPORU 』≛**\n"
-                    link = "[Mia Destek Grubuna](https://t.me/miaSupports)"
+                    text = "**≛『 USERBOT XƏTA HESABATI 』≛**\n"
+                    link = "[Legend Support Qrupuna](https://t.me/suplegend)"
                     if len(eventtext)<20:
-                        text += f"\n**🗒️ Şu yüzden:** {eventtext}\n"
-                    text += "\n✆ İsterseniz, bunu bildirebilirsiniz."
-                    text += f"- sadece bu mesajı {link} gönderin."
-                    text += "**Hata ve tarih haricinde hiçbir şey** kayıt edilmez.\n"
+                        text += f"\n**🗒️ Bunun üzündən:** {eventtext}\n"
+                    text += "\n✆ İstəsəniz, bunu bildirə bilərsiniz."
+                    text += f"- sadəcə bu mesajı {link} göndərin."
+                    text += "**Xəta və tarix xaricində heçbir şey** yüklənə bilməz.\n"
 
                     ftext = ""
-                    ftext += "========== UYARI =========="
-                    ftext += "\nBu dosya sadece burada yüklendi,"
-                    ftext += "\nSadece hata ve tarih kısmını kaydettik,"
-                    ftext += "\nGizliliğinize saygı duyuyoruz,"
-                    ftext += "\nBurada herhangi bir gizli veri varsa"
-                    ftext += "\nBu hata raporu olmayabilir, kimse verilerinize ulaşamaz.\n"
-                    ftext += "--------USERBOT HATA GUNLUGU--------\n"
-                    ftext += "\n➢ Tarih: " + date
-                    ftext += "\n➢ Grup ID: " + str(check.chat_id)
-                    ftext += "\n➢ Gönderen kişinin ID: " + str(check.sender_id)
-                    ftext += "\n\n➢ Olay Tetikleyici:\n"
+                    ftext += "========== XƏBƏRDARLIQ =========="
+                    ftext += "\nBu Fayl sadəcə burada yükləndi,"
+                    ftext += "\nSadəcə xəta və tarix qismini yüklədik,"
+                    ftext += "\nGizliliyinizə hörmət edirik,"
+                    ftext += "\nBurada hər hansı bir gizli data varsa"
+                    ftext += "\nBu xəta hesabatı olmaya bilər, kimsə datalarınızə götürə bilməz.\n"
+                    ftext += "--------USERBOT XƏTA GUNLUGU--------\n"
+                    ftext += "\n➢ Tarix: " + date
+                    ftext += "\n➢ Qrup ID: " + str(check.chat_id)
+                    ftext += "\n➢ Göndərən kişinin ID: " + str(check.sender_id)
+                    ftext += "\n\n➢ Olay Tetikləyici:\n"
                     ftext += str(check.text)
-                    ftext += "\n\n➢ Hata metni:\n"
+                    ftext += "\n\n➢ Xəta mətni:\n"
                     ftext += str(sys.exc_info()[1])
-                    ftext += "\n\n➢ Bot versiyonu:\n"
-                    ftext += "{}".format(str(MIA_VERSION))
-                    ftext += "\n\n\n➢ Geri izleme bilgisi: \n"
+                    ftext += "\n\n➢ Bot versiyası:\n"
+                    ftext += "{}".format(str(LEGEND_VERSION))
+                    ftext += "\n\n\n➢ Geri izləmə məlumatı: \n"
                     ftext += str(format_exc())
-                    ftext += "\n\n--------USERBOT HATA GUNLUGU BITIS--------"
+                    ftext += "\n\n--------USERBOT XETA GUNLUGU BITIS--------"
 
                     command = "git log --pretty=format:\"%an: %s\" -7"
 
-                    ftext += "\n\n\nSon 7 Güncelleme:\n"
+                    ftext += "\n\n\nSon 7 Güncəlləmə:\n"
 
                     process = await asyncsubshell(command,
                                                   stdout=asyncsub.PIPE,
@@ -178,7 +178,7 @@ def register(**args):
 
                     if LOGSPAMMER:
                         try:
-                            await check.edit("__🥺 Üzgünüm, UserBot bir hatayla karşılaştı.\n🐙 Hata raporu Botlog grubuna gönderildi.__")
+                            await check.edit("__🥺 Çox pisəm, UserBot bir xətayla qarşılaşdı.\n🐙 Xəta hesabatı Botlog qrupuna göndərildi.__")
                         except:
                             pass
                     await check.client.send_file(send_to,
