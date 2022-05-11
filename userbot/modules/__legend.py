@@ -8,12 +8,12 @@ from userbot.events import register
 # ██████ LANGUAGE CONSTANTS ██████ #
 
 from userbot.language import get_value
-LANG = get_value("__mia")
+LANG = get_value("__legend")
 
 # ████████████████████████████████ #
 
-@register(outgoing=True, pattern="^.[Mm]ia(?: |$)(.*)")
-async def siri(event):
+@register(outgoing=True, pattern="^.legend(?: |$)(.*)")
+async def legend(event):
     """ .mia komutun """
     args = event.pattern_match.group(1).lower()
     if args:
